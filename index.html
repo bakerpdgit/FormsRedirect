@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Forms Redirector</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem;
+        }
+        .title {
+            color: #0066cc;
+            font-weight: bold;
+            margin-bottom: 3rem;
+        }
+        .form-label {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .forms-code-input {
+            font-size: 1.5rem;
+            padding: 1rem;
+            text-align: center;
+            border: 2px solid #dee2e6;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .forms-code-input:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.25);
+        }
+        .go-btn {
+            font-size: 1.25rem;
+            padding: 0.75rem 3rem;
+            background-color: #0066cc;
+            border-color: #0066cc;
+            border-radius: 0.5rem;
+        }
+        .go-btn:hover {
+            background-color: #0052a3;
+            border-color: #0052a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1 class="title">Microsoft Forms Redirector</h1>
+        
+        <form id="formsForm">
+            <div class="mb-3">
+                <label for="formsCode" class="form-label">Enter Forms Code:</label>
+                <input 
+                    type="text" 
+                    class="form-control forms-code-input" 
+                    id="formsCode" 
+                    placeholder="Enter your forms code here"
+                    required
+                >
+            </div>
+            <button type="submit" class="btn btn-primary go-btn">GO</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.getElementById('formsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formsCode = document.getElementById('formsCode').value.trim();
+            
+            if (formsCode) {
+                const url = `https://forms.office.com/e/${formsCode}`;
+                window.open(url, '_blank');
+            } else {
+                alert('Please enter a forms code.');
+            }
+        });
+
+        // Also handle Enter key press in the input field
+        document.getElementById('formsCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('formsForm').dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
+</body>
+</html>
